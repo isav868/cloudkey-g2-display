@@ -1,29 +1,24 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Requires the installation of ImageMagick
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+One example script to place custom information on the screen of a Gen 2 CloudKey.
+Primarily intended for systems converted to be headless linux systems.
+
+Jason Anderson has a solid write up.
+https://fullduplextech.com/turn-unifi-cloud-key-gen-2-into-a-headless-linux-server/
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+This is intended to be an example of placing TEXT on the screen.  In this case I am opting for
+Hostname
+IP Address
+CPU and Memory %
 
 ### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+N/A
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+If you have ideas, or improvements, I'm happy to link.
