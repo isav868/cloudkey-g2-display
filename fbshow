@@ -1,0 +1,10 @@
+#!/bin/bash
+MYFONT=eorzea
+MYIP=$(/sbin/ifconfig eth0 | /bin/sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
+CPUPERCENT=$(/usr/bin/top -bn1 | grep "Cpu(s)" | /bin/sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | /usr/bin/awk '{print 100 - $1"%"}')
+MEMPERCENT=$(/usr/bin/free -m | /usr/bin/awk 'NR==2{printf "%.1f%%\n", $3*100/$2 }')
+/usr/bin/convert -size 128x64 xc:black out.png
+/usr/bin/convert out.png -gravity north -undercolor black -fill white -font $MYFONT -pointsize 18 -annotate +0+5 "$HOSTNAME" out.png
+/usr/bin/convert out.png -gravity south -undercolor black -fill white -font $MYFONT -pointsize 12 -annotate +0+22 "$MYIP" out.png
+/usr/bin/convert out.png -gravity south -undercolor black -fill white -font $MYFONT -pointsize 10 -annotate +0+5 "CPU: $CPUPERCENT  MEM: $MEMPERCENT" out.png
+/sbin/ck-splash -s image -f out.png
