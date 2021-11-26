@@ -1,6 +1,7 @@
 # README #
 
 Requires the installation of ImageMagick
+apt-get install imagemagick
 
 ### What is this repository for? ###
 
@@ -16,6 +17,8 @@ This is intended to be an example of placing TEXT on the screen.  In this case I
 Hostname
 IP Address
 CPU and Memory %
+
+Best if used in a cron job, once every one to five minutes per your taste.
 
 ### Contribution guidelines ###
 
