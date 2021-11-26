@@ -1,6 +1,7 @@
 # README #
 
 Requires the installation of ImageMagick
+
 apt-get install imagemagick
 
 ### What is this repository for? ###
