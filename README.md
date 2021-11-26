@@ -18,6 +18,7 @@ This is intended to be an example of placing TEXT on the screen.  In this case I
 Hostname
 IP Address
 CPU and Memory %
+I also use a playful font, change the font variable to suit your taste.
 
 Best if used in a cron job, once every one to five minutes per your taste.
 
