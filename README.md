@@ -1,8 +1,12 @@
 # README #
 
-Requires the installation of ImageMagick
+## Important ##
 
-apt-get install imagemagick
+This is a fork of an original repo: https://bitbucket.org/dskillin/cloudkey-g2-display.git
+
+Requires the installation of ImageMagick and sysstat
+
+`apt-get install imagemagick sysstat`
 
 ### What is this repository for? ###
 
@@ -15,10 +19,10 @@ https://fullduplextech.com/turn-unifi-cloud-key-gen-2-into-a-headless-linux-serv
 ### How do I get set up? ###
 
 This is intended to be an example of placing TEXT on the screen.  In this case I am opting for
-Hostname
+Time
 IP Address
 CPU and Memory %
-I also use a playful font, change the font variable to suit your taste.
+Change the font variable to suit your taste.
 
 Best if used in a cron job, once every one to five minutes per your taste.
 
