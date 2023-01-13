@@ -4,17 +4,23 @@
 # Origin:
 # https://bitbucket.org/dskillin/cloudkey-g2-display/src/main/fbshow
 #
-# 1. Install sysstat and imagemagick packages before use.
-# 2. Make sure that cron PATH is set.
-# 3. Add crontab entries:
-#    @reboot              flock -n /run/lock/fbshow.lck fbshow.sh
-#    *   *  *   *   *     flock -n /run/lock/fbshow.lck fbshow.sh
+# Install sysstat package before use.
 
 MYFONT=Helvetica
+FIXED=DejaVu-Sans-Mono
+NARROW=Helvetica-Narrow
+FXSIZE=14
 FNAME=$(mktemp --suff=.png)
+ORDER=1
 
 update_sysstat() {
-    MYIP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+    if [ $ORDER -eq 1 ]; then
+        MYIP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+        ORDER=0
+    else
+        MYIP=$(hostname -s)
+        ORDER=1
+    fi
     CPUPERCENT=$(mpstat | awk '$12 ~ /[0-9.]+/ { print 100 - $12"%" }')
     MEMPERCENT=$(free -m | awk 'NR==2{printf "%.1f%%\n", $3*100/$2 }')
 }
@@ -22,7 +28,11 @@ update_sysstat() {
 draw_sysstat() {
     TSTR=`date "+%H:%M:%S %Z"`
     #
-    convert -size 128x64 xc:black -gravity north -undercolor black -fill white -font $MYFONT -pointsize 18 -annotate +0+5 "$TSTR" -gravity south -undercolor black -fill white -font $MYFONT -pointsize 12 -annotate +0+22 "$MYIP" -gravity south -undercolor black -fill white -font $MYFONT -pointsize 10 -annotate +0+5 "CPU: $CPUPERCENT  MEM: $MEMPERCENT" $FNAME
+    convert -size 128x64 xc:black \
+        -gravity north -undercolor black -fill white -font "$FIXED" -pointsize $FXSIZE -annotate +0+5 "$MYIP" \
+        -gravity south -undercolor black -fill white -font $MYFONT -pointsize 20 -annotate +0+18 "$TSTR" \
+        -gravity south -undercolor black -fill white -font $NARROW -pointsize 11 -annotate +0+5 \
+        "CPU: $CPUPERCENT  MEM: $MEMPERCENT" $FNAME
     #
     ck-splash -s image -f $FNAME >/dev/null
 }
