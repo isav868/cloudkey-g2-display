@@ -13,12 +13,26 @@ FXSIZE=14
 FNAME=$(mktemp --suff=.png)
 ORDER=1
 
+s2dhms() {
+    ((d=${1}/(60*60*24)))
+    ((h=(${1}%(60*60*24))/(60*60)))
+    ((m=(${1}%(60*60))/60))
+    #((s=${1}%60))
+    #UPSTR=`printf "up:%dd %02d:%02d:%02d" $d $h $m $s`
+    UPSTR=`printf "up: %dd %02dh%02dm" $d $h $m`
+}
+
 update_sysstat() {
     if [ $ORDER -eq 1 ]; then
         MYIP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-        ORDER=0
-    else
+        ORDER=2
+    elif [ $ORDER -eq 2 ]; then
         MYIP=$(hostname -s)
+        ORDER=3
+    else
+        UPTS=`cut -d ' ' -f 1 /proc/uptime|cut -d '.' -f1`
+        s2dhms $UPTS
+        MYIP=$UPSTR
         ORDER=1
     fi
     CPUPERCENT=$(mpstat | awk '$12 ~ /[0-9.]+/ { print 100 - $12"%" }')
