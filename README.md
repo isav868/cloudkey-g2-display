@@ -34,8 +34,3 @@ crontab:
 *   *  *   *   *     flock -n /run/lock/fbshow.lck fbshow.sh
 ```
 
-### Contribution guidelines ###
-
-N/A
-
-If you have ideas, or improvements, I'm happy to link.
