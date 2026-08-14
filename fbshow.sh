@@ -98,7 +98,12 @@ cleanup() {
     rm -f "$FNAME"
 }
 
-if [ "$1" = "once" ]; then
+if [[ ! -x /sbin/ck-splash ]]; then
+	echo ERR: /sbin/ck-splash not found >&2
+	exit 1
+fi
+
+if [[ "$1" = "once" ]]; then
     #
     # run once then exit
     #
