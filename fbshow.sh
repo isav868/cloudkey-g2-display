@@ -97,9 +97,11 @@ banner_str() {
 
 cleanup() {
     rm -f "$FNAME"
+    rm -f "$OUTFN"
 }
 
 if [[ ! -x /sbin/ck-splash ]]; then
+	cleanup
 	#echo ERR: /sbin/ck-splash not found >&2
 	#exit 1
 	exit
