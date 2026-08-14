@@ -99,8 +99,9 @@ cleanup() {
 }
 
 if [[ ! -x /sbin/ck-splash ]]; then
-	echo ERR: /sbin/ck-splash not found >&2
-	exit 1
+	#echo ERR: /sbin/ck-splash not found >&2
+	#exit 1
+	exit
 fi
 
 if [[ "$1" = "once" ]]; then
