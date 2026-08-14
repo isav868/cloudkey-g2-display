@@ -13,6 +13,7 @@ L1SZ=14
 L2SZ=18
 L3SZ=11
 FNAME=$(mktemp --suff=.png)
+OUTFN=$(mktemp --suff=.png)
 ORDER=0
 ABTIMER=60
 PXSTEP=15
@@ -89,8 +90,8 @@ banner_str() {
                 -gravity center -undercolor black -fill white -font "$FONT" \
                 -pointsize $FONTSZ -annotate +0+0 "$TEXT" $FNAME
     for i in `seq 0 $PXSTEP $LASTPX`; do
-            convert -crop 128x64+$i+0 $FNAME out.png
-            sudo ck-splash -s image -f out.png >/dev/null
+            convert -crop 128x64+$i+0 $FNAME $OUTFN
+            sudo ck-splash -s image -f $OUTFN >/dev/null
     done
 }
 
@@ -150,7 +151,6 @@ while :; do
         banner_str "Hostname: $MYHNAME" "$FIXED" $HS_FONTSZ $HS_IMGLEN
         banner_str "Uptime: $UPSTR" "$FIXED" $UP_FONTSZ $UP_IMGLEN
         banner_str "CPU load: $CPUPERCENT, Memory used: $MEMPERCENT" "$NARROW" $NR_FONTSZ $NR_IMGLEN
-        #rm -f out.png
         DISPMODE=1
     fi
     sleep .1
